@@ -1,0 +1,125 @@
+.hero {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+    animation: fadeIn .9s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-content {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-bio {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin: 0 0 2.5rem;
+  max-width: 360px;
+}
+
+.hero-decoration {
+  flex: 0 0 30%;
+  /* placeholder styling for now */
+}
+
+.hero-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  background: var(--color-accent-muted);
+  border: 1px solid var(--color-accent-border);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 1rem;
+}
+
+.hero-name {
+  font-size: 3.5rem;
+  margin: 0 0 1rem;
+  color: var(--color-text-primary);
+}
+
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  color: #4a7c4e;
+  background: rgba(74, 124, 78, 0.1);
+  border: 1px solid rgba(74, 124, 78, 0.3);
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin: 0 0 1.25rem;
+}
+
+.hero-tagline {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin: 0 0 2rem;
+  max-width: 400px;
+}
+
+
+
+
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.hero-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--color-cta-text);
+  background: var(--color-cta);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.hero-btn:hover {
+  opacity: 0.85;
+}
+
+.hero-btn-secondary {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.hero-btn-secondary:hover {
+  opacity: 1;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}

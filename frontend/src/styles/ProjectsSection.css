@@ -1,0 +1,16 @@
+.projects-section {
+  padding: 1rem 2rem 4rem 2rem;
+}
+
+.projects-title {
+    margin-bottom: 2.5rem;
+    text-align: center;
+  
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: flex-start;
+}

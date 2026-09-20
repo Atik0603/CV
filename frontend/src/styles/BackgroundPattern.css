@@ -1,0 +1,44 @@
+.background-pattern-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.pattern-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+}
+.pattern-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}
+
+.pattern-dark svg,
+.pattern-light svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pattern-light {
+  display: none;
+}
+
+:root[data-theme="light"] .pattern-dark {
+  display: none;
+}
+
+:root[data-theme="light"] .pattern-light {
+  display: block;
+}
