@@ -1,0 +1,124 @@
+.admin-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.admin-form label {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  margin-top: 1rem;
+}
+
+.admin-form input,
+.admin-form select {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+}
+
+.admin-form input[type="color"] {
+  padding: 0.2rem;
+  height: 40px;
+  width: 80px;
+  cursor: pointer;
+}
+
+.link-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.link-row input {
+  flex: 1;
+}
+
+.admin-form button {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  width: fit-content;
+}
+
+.admin-form button[type="submit"] {
+  background: var(--color-cta);
+  color: var(--color-cta-text);
+  border: none;
+}
+
+.admin-status {
+  margin-top: 1rem;
+  color: var(--color-accent);
+}
+
+.admin-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+.admin-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+}
+
+.admin-list-item button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: transparent;
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+.admin-form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.admin-form-actions button {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.admin-form-actions button[type="submit"] {
+  background: var(--color-cta);
+  color: var(--color-cta-text);
+  border: none;
+}
+
+.admin-form-actions button[type="button"] {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
+}

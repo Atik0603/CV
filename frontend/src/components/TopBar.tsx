@@ -1,9 +1,13 @@
-import { profile } from "../data/profile";
+import { useProfile } from "../hooks/useProfile";
 import "../styles/TopBar.css";
 import ThemeToggle from "./ThemeToggle";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 function TopBar() {
+  const profile = useProfile();
+
+  if (!profile) return null;
+
   return (
     <header className="top-bar">
       <span className="top-bar-name">{profile.name}</span>

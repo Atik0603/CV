@@ -11,5 +11,30 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://cvadmin:atik554895@db:5432/cvdb
+      JWT_SECRET: dlQG7yYCjP98VUkbRK0mTEuBMv3pse1IgzcnJXrS
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+  
+  
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
 volumes:
   pgdata:

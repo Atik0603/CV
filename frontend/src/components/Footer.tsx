@@ -1,7 +1,11 @@
-import { profile } from "../data/profile";
+import { useProfile } from "../hooks/useProfile";
 import "../styles/Footer.css";
 
 function Footer() {
+  const profile = useProfile();
+
+  if (!profile) return null;
+
   return (
     <footer className="footer">
       <span>{profile.name}</span>

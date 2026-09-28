@@ -1,10 +1,17 @@
-import { profile } from "../data/profile";
+import { useProfile } from "../hooks/useProfile";
 import "../styles/Hero.css";
 
 function Hero() {
+  const profile = useProfile();
+
+  if (!profile) return null;
+
   return (
     <section className="hero">
       <div className="hero-content">
+        {profile.photoUrl && (
+          <img src={profile.photoUrl} alt={profile.name} className="hero-photo" />
+        )}
         <span className="hero-badge">{profile.role}</span>
 
         <h1 className="hero-name">{profile.name}</h1>
@@ -22,9 +29,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="hero-decoration">
-        {/* placeholder for pattern/animation/logo, built later */}
-      </div>
+      <div className="hero-decoration"></div>
     </section>
   );
 }
