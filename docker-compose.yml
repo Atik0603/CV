@@ -4,7 +4,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: cvadmin
-      POSTGRES_PASSWORD: atik554895
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: cvdb
     ports:
       - "5432:5432"
@@ -17,12 +17,13 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DATABASE_URL: postgresql://cvadmin:atik554895@db:5432/cvdb
-      JWT_SECRET: dlQG7yYCjP98VUkbRK0mTEuBMv3pse1IgzcnJXrS
+      DATABASE_URL: postgresql://cvadmin:${POSTGRES_PASSWORD}@db:5432/cvdb
     depends_on:
       - db
     volumes:
       - ./backend:/app
+    env_file:
+      - .env
   
   
   frontend:
