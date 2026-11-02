@@ -10,6 +10,7 @@ interface ProfileForm {
   photo_url: string;
   github_url: string;
   linkedin_url: string;
+  email: string;
 }
 
 const emptyForm: ProfileForm = {
@@ -20,6 +21,7 @@ const emptyForm: ProfileForm = {
   photo_url: "",
   github_url: "",
   linkedin_url: "",
+  email: "",
 };
 
 function AdminProfileForm() {
@@ -29,7 +31,7 @@ function AdminProfileForm() {
 
   useEffect(() => {
     authFetch("/profile/")
-      .then((data) => setForm({ ...emptyForm, ...data, photo_url: data.photo_url ?? "" }))
+      .then((data) => setForm({ ...emptyForm, ...data, photo_url: data.photo_url ?? "", email: data.email ?? "", }))
       .catch(() => {
         // 404 just means the profile hasn't been created yet, so start blank
       })
@@ -55,6 +57,7 @@ function AdminProfileForm() {
           photo_url: form.photo_url.trim() || null,
           github_url: form.github_url,
           linkedin_url: form.linkedin_url,
+          email: form.email.trim() || null,
         }),
       });
       setStatus("Profile saved!");
@@ -89,6 +92,13 @@ function AdminProfileForm() {
 
       <label>LinkedIn URL</label>
       <input value={form.linkedin_url} onChange={(e) => updateField("linkedin_url", e.target.value)} required />
+      
+      <label>Email (optional)</label>
+      <input
+        type="email"
+        value={form.email}
+        onChange={(e) => updateField("email", e.target.value)}
+      />
 
       <div className="admin-form-actions">
         <button type="submit">Save Profile</button>

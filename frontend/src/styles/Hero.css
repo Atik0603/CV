@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: center;
   padding: 2rem;
-    animation: fadeIn .9s ease;
+  animation: fadeIn .9s ease;
+  overflow-y: auto;
 }
 
 @keyframes fadeIn {
@@ -17,7 +18,7 @@
 }
 
 .hero-content {
-  flex: 0 0 70%;
+  flex: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,10 +32,7 @@
   max-width: 360px;
 }
 
-.hero-decoration {
-  flex: 0 0 30%;
-  /* placeholder styling for now */
-}
+
 
 .hero-photo {
   width: 100px;
@@ -52,7 +50,8 @@
   background: var(--color-accent-muted);
   border: 1px solid var(--color-accent-border);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.5px;
   padding: 5px 12px;
   border-radius: 999px;
   margin: 0 0 1rem;
@@ -60,6 +59,9 @@
 
 .hero-name {
   font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
   margin: 0 0 1rem;
   color: var(--color-text-primary);
 }
@@ -69,7 +71,8 @@
   align-items: center;
   gap: 6px;
   align-self: flex-start;
-  font-size: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   color: #4a7c4e;
   background: rgba(74, 124, 78, 0.1);
   border: 1px solid rgba(74, 124, 78, 0.3);
@@ -103,6 +106,7 @@
   color: var(--color-cta-text);
   background: var(--color-cta);
   cursor: pointer;
+  font-family: inherit;
   font-size: 1rem;
   font-weight: 500;
   transition: opacity 0.2s;
@@ -122,4 +126,53 @@
   opacity: 1;
   border-color: var(--color-accent);
   color: var(--color-accent);
+}
+
+.hero-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4a7c4e;
+  animation: pulse 2s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(74, 124, 78, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(74, 124, 78, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(74, 124, 78, 0);
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero {
+    height: auto;
+    padding: 2rem 1rem 1.5rem;
+    overflow: visible;
+  }
+
+  .hero-photo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .hero-name {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-badge,
+  .hero-status {
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    
+  }
 }

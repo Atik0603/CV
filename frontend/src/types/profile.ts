@@ -6,4 +6,5 @@ export interface Profile {
   photoUrl?: string;
   githubUrl: string;
   linkedinUrl: string;
+  email?: string;
 }

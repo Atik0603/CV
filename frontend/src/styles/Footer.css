@@ -1,19 +1,10 @@
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--color-bg-elevated);
-  border-top: 1px solid var(--color-border);
-}
-
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-}   
-
-.footer-links a {
+  padding: 0.6rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   color: var(--color-text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
+  opacity: 0.7;
 }

@@ -1,0 +1,124 @@
+/* Receding page */
+.app-wrapper {
+  transform-origin: 50% var(--recede-y, 50vh);
+  transition:
+    transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    border-radius 0.4s,
+    filter 0.4s;
+}
+
+html.sheet-open,
+html.sheet-open body {
+  background: #000;
+  overflow: hidden;
+}
+
+html.sheet-open .app-wrapper {
+  transform: scale(0.92);
+  border-radius: 18px;
+  filter: brightness(0.7);
+  overflow: hidden;
+}
+
+/* Backdrop + sheet */
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(100dvh - 44px);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+  border-bottom: none;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+}
+
+/* Header */
+.sheet-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--color-text-primary);
+}
+
+.sheet-position {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+.sheet-close {
+  margin-left: auto;
+}
+
+.sheet-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 10px;
+  box-shadow: 2px 2px 0 var(--color-text-primary);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, opacity 0.2s;
+}
+
+.sheet-icon-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.sheet-icon-btn:disabled {
+  opacity: 0.3;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Content panes */
+.sheet-body {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+}
+
+.sheet-pane {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.25rem 1.25rem 2.5rem;
+}
+
+/* Sticker link pills inside the sheet */
+.sheet .expanded-links {
+  flex-wrap: wrap;
+}
+
+.sheet .link-pill {
+  border: 2px solid var(--color-text-primary);
+  box-shadow: 2px 2px 0 var(--color-text-primary);
+  border-radius: 10px;
+}
+
+.sheet .link-pill:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 transparent;
+}

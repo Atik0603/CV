@@ -1,11 +1,23 @@
-import { useProfile } from "../hooks/useProfile";
 import "../styles/Hero.css";
+import Skills from "./Skills";
+import { API_BASE } from "../utils/api";
+import type { Profile } from "../types/profile";
+import { useIsMobile } from "../hooks/useMediaQuery";
+import { Link } from "react-router-dom";
 
-function Hero() {
-  const profile = useProfile();
+interface HeroProps {
+  profile: Profile | null;
+}
+
+function Hero({ profile }: HeroProps) {
+  const isMobile = useIsMobile();
+
 
   if (!profile) return null;
 
+   function scrollToSkills() {
+    document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+  }
   return (
     <section className="hero">
       <div className="hero-content">
@@ -24,12 +36,28 @@ function Hero() {
         <p className="hero-bio">{profile.bio}</p>
 
         <div className="hero-actions">
-          <button className="hero-btn">Download CV</button>
-          <button className="hero-btn hero-btn-secondary">Show CV</button>
+          <a className="hero-btn" href={`${API_BASE}/cv/?download=true`}>
+            Download CV
+          </a>
+          <a
+            className="hero-btn hero-btn-secondary"
+            href={`${API_BASE}/cv/`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Show CV
+          </a>
         </div>
       </div>
 
-      <div className="hero-decoration"></div>
+      {isMobile ? (
+          <nav className="hero-sections">
+            <Link to="/projects">Projects</Link>
+            <button onClick={scrollToSkills}>Skills</button>
+          </nav>
+        ) : (
+          <Skills />
+        )}
     </section>
   );
 }

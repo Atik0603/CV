@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, ARRAY, TIMESTAMP
+from sqlalchemy import Column, Integer, String, ForeignKey, ARRAY, TIMESTAMP, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from .database import Base
@@ -35,6 +35,8 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, nullable=False)
     hashed_password = Column(String, nullable=False)
+    reset_token_hash = Column(String, nullable=True, index=True)
+    reset_token_expires = Column(DateTime, nullable=True)
 
 
 class Profile(Base):
@@ -48,6 +50,7 @@ class Profile(Base):
     photo_url = Column(String)
     github_url = Column(String, nullable=False)
     linkedin_url = Column(String, nullable=False)
+    email = Column(String, nullable=True)
 
 
 

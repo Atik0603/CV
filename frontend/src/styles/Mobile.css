@@ -1,0 +1,102 @@
+@media (max-width: 1023px) {
+  /* CV buttons */
+  .hero-btn {
+    font-weight: 600;
+    border: 2px solid var(--color-text-primary);
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 var(--color-text-primary);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .hero-btn-secondary {
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    border-color: var(--color-text-primary);
+    box-shadow: 3px 3px 0 var(--color-accent);
+  }
+
+  .hero-btn:hover,
+  .hero-btn-secondary:hover {
+    opacity: 1;
+    color: inherit;
+    border-color: var(--color-text-primary);
+  }
+
+  .hero-btn:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0 0 0 transparent;
+  }
+
+  /* Section links under the hero */
+  .hero-sections {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .hero-sections button,
+  .hero-sections a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--color-text-primary);
+    padding: 0 0 2px;
+    color: var(--color-text-primary);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .hero-sections button:active,
+  .hero-sections a:active {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* Top bar icons + theme toggle */
+  .top-bar {
+    padding: 0.6rem 1rem;
+  }
+
+  .top-bar-greeting {
+    font-size: 1.2rem;
+  }
+
+  .top-bar-links {
+    gap: 0.6rem;
+  }
+
+  .top-bar-links a,
+  .theme-toggle,
+  .top-bar-back {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background: var(--color-bg);
+    color: var(--color-accent);
+    border: 2px solid var(--color-text-primary);
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 var(--color-text-primary);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+
+  .top-bar-links a svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .top-bar-links a:hover {
+    transform: none;
+  }
+
+  .top-bar-links a:active,
+  .theme-toggle:active,
+  .top-bar-back:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0 0 0 transparent;
+  }
+}

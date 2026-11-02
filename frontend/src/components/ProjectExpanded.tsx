@@ -10,7 +10,7 @@ interface ProjectExpandedProps {
 
 function ProjectExpanded({ project, isExpanded, onClose }: ProjectExpandedProps) {
   return createPortal(
-    <div className={`overlay-backdrop ${isExpanded ? "open" : "closing"}`} onClick={onClose}>
+    <div className={`overlay-backdrop ${isExpanded ? "open" : "closing"}`} data-own-scroll onClick={onClose}>
       <div className={`expanded-panel ${isExpanded ? "open" : "closing"}`} onClick={(e) => e.stopPropagation()}>
         <h2 className="expanded-title">{project.name}</h2>
 
@@ -20,11 +20,20 @@ function ProjectExpanded({ project, isExpanded, onClose }: ProjectExpandedProps)
           ))}
         </ul>
 
-        {project.mediaType === "image" ? (
-          <img src={project.mediaUrl} alt={project.name} className="project-media" />
-        ) : (
-          <video src={project.mediaUrl} controls className="project-media" />
-        )}
+        {project.mediaUrl &&
+          (project.mediaType === "image" ? (
+            <img src={project.mediaUrl} alt={project.name} className="project-media" />
+          ) : (
+            <video
+              src={project.mediaUrl}
+              className="project-media"
+              autoPlay
+              muted
+              loop
+              playsInline
+              controls
+            />
+          ))}
 
         <div className="expanded-links">
           {project.links.map((link) => (

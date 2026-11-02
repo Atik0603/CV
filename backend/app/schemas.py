@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 class ProjectLinkBase(BaseModel):
@@ -55,6 +55,7 @@ class ProfileBase(BaseModel):
     photo_url: Optional[str] = None
     github_url: str
     linkedin_url: str
+    email: str | None = None
 
 class ProfileOut(ProfileBase):
     id: int
@@ -75,3 +76,11 @@ class SkillOut(SkillBase):
 
     class Config:
         from_attributes = True
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(min_length=8)

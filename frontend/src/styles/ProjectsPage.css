@@ -1,0 +1,64 @@
+.projects-page {
+  padding: 1.5rem 1rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.projects-page-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-top: 1rem;
+}
+
+.projects-page-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.8rem;
+  text-align: left;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+  border: 2px solid var(--color-text-primary);
+  border-radius: 12px;
+  box-shadow: 3px 3px 0 var(--color-text-primary);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.projects-page-row:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 transparent;
+}
+
+.projects-page-swatch {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border: 2px solid var(--color-text-primary);
+  border-radius: 10px;
+}
+
+.projects-page-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.projects-page-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.projects-page-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,43 +1,54 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import ProjectCard from "./ProjectCard";
-//import { projects } from "../data/projects";
-import { useState, useEffect } from "react";
+import ProjectCarousel from "./ProjectCarousel";
+import ProjectExpanded from "./ProjectExpanded";
+import { useProjects } from "../hooks/useProjects";
+import { useIsMobile } from "../hooks/useMediaQuery";
 import "../styles/ProjectsSection.css";
-import type { Project } from "../types/project";
-
-function mapApiProject(apiProject: any): Project {
-  return {
-    id: apiProject.id,
-    name: apiProject.name,
-    shortDescription: apiProject.short_description,
-    longDescription: apiProject.long_description,
-    mediaUrl: apiProject.media_url,
-    mediaType: apiProject.media_type,
-    color: apiProject.color,
-    links: apiProject.links.map((link: any) => ({
-      label: link.label,
-      url: link.url,
-    })),
-  };
-}
-
+import { AnimatePresence } from "motion/react";
+import ProjectSheet from "./ProjectSheet";
+import { useSheetOpen } from "../hooks/useSheetOpen";
+import "../styles/ProjectsSection.css";
 
 function ProjectsSection() {
-    const [projects, setProjects] = useState<Project[]>([]);
+  const projects = useProjects();
+  const isMobile = useIsMobile();
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  useSheetOpen(openIndex !== null);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/projects/")
-      .then((res) => res.json())
-      .then((data) => setProjects(data.map(mapApiProject)));
-  }, []);
+
+  if (isMobile) {
+    return (
+      <section className="projects-section">
+        <div className="projects-header">
+          <h2 className="projects-title">Projects</h2>
+          <Link to="/projects" className="projects-see-all">See all →</Link>
+        </div>
+
+      <ProjectCarousel projects={projects} onOpen={setOpenIndex} focusIndex={openIndex}/>
+
+       <AnimatePresence>
+          {openIndex !== null && (
+            <ProjectSheet
+              key="sheet"
+              projects={projects}
+              index={openIndex}
+              onIndexChange={setOpenIndex}
+              onClose={() => setOpenIndex(null)}
+            />
+          )}
+        </AnimatePresence>
+      </section>
+    );
+  }
+
   return (
     <section className="projects-section">
       <h2 className="projects-title">Projects</h2>
       <div className="projects-grid">
         {projects.map((project, index) => (
-          <div
-            key={project.id}
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
+          <div key={project.id} style={{ animationDelay: `${index * 0.1}s` }}>
             <ProjectCard project={project} />
           </div>
         ))}

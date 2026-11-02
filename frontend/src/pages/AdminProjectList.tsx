@@ -58,15 +58,15 @@ function AdminProjectList() {
               <li key={project.id} className="admin-list-item">
                 <span>{project.name}</span>
                 <div>
-                  <button onClick={() => { setEditingProject(project); setShowForm(true); }}>
+                  <button className="admin-btn admin-btn-sm" onClick={() => { setEditingProject(project); setShowForm(true); }}>
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(project.id)}>Delete</button>
+                  <button className="admin-btn admin-btn-sm admin-btn-danger" onClick={() => handleDelete(project.id)}>Delete</button>
                 </div>
               </li>
             ))}
           </ul>
-          <button onClick={() => { setEditingProject(null); setShowForm(true); }}>
+          <button className="admin-btn admin-btn-primary"  onClick={() => { setEditingProject(null); setShowForm(true); }}>
             + Add New Project
           </button>
         </>

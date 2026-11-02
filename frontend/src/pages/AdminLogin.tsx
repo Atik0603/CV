@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link  } from "react-router-dom";
+import { API_BASE } from "../utils/api";
 
 function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -12,8 +13,8 @@ function AdminLogin() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:8000/auth/login", {
-        method: "POST",
+      const res = await fetch(`${API_BASE}/auth/login`, {
+      method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
@@ -58,6 +59,11 @@ function AdminLogin() {
         <button type="submit" style={{ padding: "0.5rem 1rem" }}>
           Log in
         </button>
+        <p style={{ marginTop: "1rem", fontSize: "0.9rem" }}>
+          <Link to="/admin/forgot-password" style={{ color: "#d4af37" }}>
+            Forgot password?
+          </Link>
+        </p>
       </form>
     </div>
   );

@@ -1,9 +1,67 @@
-from fastapi import APIRouter, Depends, HTTPException
+import os
+import secrets
+import hashlib
+from datetime import datetime, timedelta
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session
 from .. import models, schemas, auth
 from ..database import get_db
+from ..email_utils import send_email
 
 router = APIRouter(prefix="/auth", tags=["auth"])
+
+RESET_TOKEN_MINUTES = 30
+
+
+def hash_token(token: str) -> str:
+    return hashlib.sha256(token.encode()).hexdigest()
+
+@router.post("/forgot-password")
+def forgot_password(
+    data: schemas.ForgotPasswordRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+):
+    user = db.query(models.User).filter(models.User.email == data.email).first()
+
+    if user:
+        token = secrets.token_urlsafe(32)
+        user.reset_token_hash = hash_token(token)
+        user.reset_token_expires = datetime.utcnow() + timedelta(minutes=RESET_TOKEN_MINUTES)
+        db.commit()
+
+        link = f"{os.environ['FRONTEND_URL']}/admin/reset-password?token={token}"
+        body = (
+            "Someone requested a password reset for your CV website admin account.\n\n"
+            f"Reset your password here (valid for {RESET_TOKEN_MINUTES} minutes):\n{link}\n\n"
+            "If this wasn't you, ignore this email. Your password stays the same."
+        )
+        background_tasks.add_task(send_email, user.email, "Reset your password", body)
+
+    return {"message": "If that email is registered, a reset link has been sent."}
+
+
+@router.post("/reset-password")
+def reset_password(data: schemas.ResetPasswordRequest, db: Session = Depends(get_db)):
+    user = (
+        db.query(models.User)
+        .filter(models.User.reset_token_hash == hash_token(data.token))
+        .first()
+    )
+
+    if (
+        not user
+        or not user.reset_token_expires
+        or user.reset_token_expires < datetime.utcnow()
+    ):
+        raise HTTPException(status_code=400, detail="Invalid or expired reset link")
+
+    user.hashed_password = auth.hash_password(data.new_password)
+    user.reset_token_hash = None
+    user.reset_token_expires = None
+    db.commit()
+
+    return {"message": "Password updated"}
 
 
 @router.post("/signup", response_model=schemas.Token)

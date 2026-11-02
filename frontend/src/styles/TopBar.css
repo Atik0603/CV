@@ -7,20 +7,28 @@
   border-bottom: 2px solid var(--color-border);
 }
 
-.top-bar-name {
-  font-weight: 500;
-  color: var(--color-text-primary);
+.top-bar-greeting {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-accent);
 }
 
 .top-bar-links {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1.25rem;
 }
 
 .top-bar-links a {
+  display: flex;
   color: var(--color-text-secondary);
-  text-decoration: none;
-  font-size: 0.9rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.top-bar-links a:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 .theme-toggle {
