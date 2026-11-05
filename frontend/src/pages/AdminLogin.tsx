@@ -18,6 +18,10 @@ function AdminLogin() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+      if (res.status === 429) {
+        setError("Too many attempts. Wait a minute and try again.");
+        return;
+      }
 
       if (!res.ok) {
         throw new Error("Invalid email or password");

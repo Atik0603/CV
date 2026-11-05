@@ -2,7 +2,7 @@ import os
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
 from jose import jwt
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status 
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 

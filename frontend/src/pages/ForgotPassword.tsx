@@ -17,6 +17,10 @@ function ForgotPassword() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
+      if (res.status === 429) {
+        setMessage("Too many requests. Try again in a few minutes.");
+        return;
+      }
       const data = await res.json();
       setMessage(data.message);
     } catch {

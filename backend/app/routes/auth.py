@@ -2,7 +2,8 @@ import os
 import secrets
 import hashlib
 from datetime import datetime, timedelta
-from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
+from ..rate_limit import limiter
 from sqlalchemy.orm import Session
 from .. import models, schemas, auth
 from ..database import get_db
@@ -17,7 +18,9 @@ def hash_token(token: str) -> str:
     return hashlib.sha256(token.encode()).hexdigest()
 
 @router.post("/forgot-password")
+@limiter.limit("3/15minutes")
 def forgot_password(
+    request: Request,
     data: schemas.ForgotPasswordRequest,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
@@ -42,7 +45,8 @@ def forgot_password(
 
 
 @router.post("/reset-password")
-def reset_password(data: schemas.ResetPasswordRequest, db: Session = Depends(get_db)):
+@limiter.limit("10/hour")
+def reset_password(request: Request, data: schemas.ResetPasswordRequest, db: Session = Depends(get_db)):
     user = (
         db.query(models.User)
         .filter(models.User.reset_token_hash == hash_token(data.token))
@@ -85,7 +89,8 @@ def signup(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 
 @router.post("/login", response_model=schemas.Token)
-def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def login( request: Request, user: schemas.UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if not db_user or not auth.verify_password(user.password, db_user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid email or password")
